@@ -1,28 +1,25 @@
-# Predict-H1N1-And-Seasonal-Flu
-This is a DrivenData competition.
 
-The goal is to predict how likely individuals are to receive their H1N1 and seasonal flu vaccines. Specifically, you'll be predicting two probabilities: one for h1n1_vaccine and one for seasonal_vaccine.
+# Flu Shot Learning: Predict H1N1 and Seasonal Flu Vaccines
 
-Each row in the dataset represents one person who responded to the National 2009 H1N1 Flu Survey.
+Introduction
+This project is based on the DrivenData competition focused on predicting the likelihood of individuals receiving their H1N1 and seasonal flu vaccines. The survey collected data from respondents who participated in the National 2009 H1N1 Flu Survey. The challenge is to predict the probabilities of individuals getting the H1N1 vaccine and the seasonal flu vaccine based on various features.
 
-For this competition, there are two target variables:
+# Objective
+Our goal is to predict the probabilities of individuals receiving the h1n1_vaccine and seasonal_vaccine labels using the provided dataset.
 
-h1n1_vaccine - Whether respondent received H1N1 flu vaccine.
-seasonal_vaccine - Whether respondent received seasonal flu vaccine.
-Both are binary variables: 0 = No; 1 = Yes. Some respondents didn't get either vaccine, others got only one, and some got both. This is formulated as a multilabel (and not multiclass) problem.
+The results of the project will be evaluated using the area under the receiver operating characteristic curve (ROC AUC) for both h1n1_vaccine and seasonal_vaccine predictions. The mean of these two scores will determine the overall performance.
 
-The features in this dataset
-You are provided a dataset with 36 columns. The first column respondent_id is a unique and random identifier. The remaining 35 features are described below.
+# Dataset Description
+The dataset consists of 36 columns, with the first column "respondent_id" being a unique identifier. The remaining 35 features provide information about respondents' characteristics and opinions related to the flu vaccines.
 
-For all binary variables: 0 = No; 1 = Yes.
+# Features
+Here are some of the features available in the dataset:
 
-h1n1_concern - Level of concern about the H1N1 flu.
-0 = Not at all concerned; 1 = Not very concerned; 2 = Somewhat concerned; 3 = Very concerned.
-h1n1_knowledge - Level of knowledge about H1N1 flu.
-0 = No knowledge; 1 = A little knowledge; 2 = A lot of knowledge.
-behavioral_antiviral_meds - Has taken antiviral medications. (binary)
-behavioral_avoidance - Has avoided close contact with others with flu-like symptoms. (binary)
-behavioral_face_mask - Has bought a face mask. (binary)
+h1n1_concern: Level of concern about the H1N1 flu.
+h1n1_knowledge: Level of knowledge about H1N1 flu.
+behavioral_antiviral_meds: Whether the respondent has taken antiviral medications.
+behavioral_avoidance: Whether the respondent has avoided close contact with others with flu-like symptoms.
+behavioral_face_mask: Whether the respondent has bought a face mask.
 behavioral_wash_hands - Has frequently washed hands or used hand sanitizer. (binary)
 behavioral_large_gatherings - Has reduced time at large gatherings. (binary)
 behavioral_outside_home - Has reduced contact with people outside of own household. (binary)
@@ -60,7 +57,29 @@ household_children - Number of children in household, top-coded to 3.
 employment_industry - Type of industry respondent is employed in. Values are represented as short random character strings.
 employment_occupation - Type of occupation of respondent. Values are represented as short random character strings.
 
-Performance will be evaluated according to the area under the receiver operating characteristic curve (ROC AUC) for each of the two target variables. The mean of these two scores will be the overall score. A higher value indicates stronger performance.
 
 
+# Exploratory Data Analysis (EDA)
+Our EDA will involve understanding the distribution of the target variables (h1n1_vaccine and seasonal_vaccine) and their relationships with the various features. We will also explore any patterns or correlations that might impact vaccine uptake.
+
+To determine sufficient optimization of our model, I ran a backwards optimization algorythm. It firt evaluates model strength against a null model and then revaluates the model with one less variables. The model that performed the best contained 6 variables:
+      
+doctor_recc_h1n1, 
+opinion_h1n1_vacc_effective, 
+health_worker, 
+opinion_h1n1_risk,
+age_group, 
+h1n1_vaccine         
+
+
+# Model and Approach
+For this project, we will utilize a classification approach to predict the binary outcomes for h1n1_vaccine and seasonal_vaccine. As a performance metric, we will use the ROC AUC score, which provides insights into the model's ability to distinguish between positive and negative cases.
+
+For both target labels I used the below models:
+1) Logit model as a baseline
+2) Random Forest Model
+3) Cross Validation Tree Model
+
+# Proof of Submission
+![image](https://github.com/jconns/Predict-H1N1-And-Seasonal-Flu/assets/48659723/1d143a82-0e7a-438b-bce2-092732d098d6)
 
